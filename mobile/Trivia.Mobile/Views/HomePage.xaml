@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Trivia.Mobile.ViewModels"
+             xmlns:models="clr-namespace:Trivia.Mobile.Models"
+             x:Class="Trivia.Mobile.Views.HomePage"
+             x:DataType="vm:HomeViewModel"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView Background="{StaticResource PageGradient}">
+        <VerticalStackLayout Padding="20,60,20,28" Spacing="22">
+
+            <!-- ===== Cabecera: usuario + energía ===== -->
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                <Border Grid.Column="0" WidthRequest="46" HeightRequest="46"
+                        BackgroundColor="{StaticResource Primary}" StrokeThickness="0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="23" />
+                    </Border.StrokeShape>
+                    <Label Text="{Binding UserInitials}" TextColor="{StaticResource BgBase}"
+                           FontFamily="OpenSansSemibold" FontSize="16"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+
+                <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                    <Label Text="{Binding UserName}" Style="{StaticResource H2}" />
+                    <Border Style="{StaticResource ChipBorder}" HorizontalOptions="Start"
+                            BackgroundColor="#2A2247">
+                        <Label Text="{Binding UserLevelLabel}" FontSize="11"
+                               TextColor="{StaticResource PrimaryLight}" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <Border Grid.Column="2" BackgroundColor="{StaticResource Accent}" StrokeThickness="0"
+                        Padding="10,7" VerticalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="22" />
+                    </Border.StrokeShape>
+                    <HorizontalStackLayout Spacing="6">
+                        <Image Source="icon_bolt.png" WidthRequest="18" HeightRequest="18" />
+                        <Label Text="{Binding Coins}" TextColor="{StaticResource AccentDark}"
+                               FontFamily="OpenSansSemibold" FontSize="14" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- ===== Tarea diaria ===== -->
+            <Border Style="{StaticResource CardAlt}">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="13">
+                    <Border Grid.Column="0" WidthRequest="54" HeightRequest="54"
+                            BackgroundColor="{StaticResource SurfaceElevated}" StrokeThickness="0"
+                            VerticalOptions="Center">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="14" />
+                        </Border.StrokeShape>
+                        <Image Source="icon_calendar.png" WidthRequest="26" HeightRequest="26"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                        <Label Text="Tarea diaria" Style="{StaticResource H2}" />
+                        <Label Text="14 preguntas" Style="{StaticResource Caption}" />
+                        <ProgressBar Progress="{Binding DailyTaskProgress}"
+                                     ProgressColor="{StaticResource Accent}"
+                                     BackgroundColor="{StaticResource BgDeep}"
+                                     HeightRequest="8" />
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" Text="Progreso" Style="{StaticResource Muted}" />
+                            <Label Grid.Column="1" Text="{Binding DailyTaskProgressLabel}" Style="{StaticResource Muted}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- ===== Botón jugar ===== -->
+            <Button Text="Jugar ahora"
+                    Style="{StaticResource PrimaryButton}"
+                    Command="{Binding PlayCommand}" />
+
+            <!-- ===== Categorías ===== -->
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Grid.Column="0" Text="Categorías" Style="{StaticResource H2}" />
+                <Label Grid.Column="1" Text="Ver todas" TextColor="{StaticResource PrimaryMuted}" FontSize="12" VerticalOptions="Center" />
+            </Grid>
+
+            <CollectionView ItemsSource="{Binding Categories}" HeightRequest="92">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:CategoryItem">
+                        <VerticalStackLayout WidthRequest="64" Spacing="6">
+                            <Border WidthRequest="64" HeightRequest="64"
+                                    BackgroundColor="{StaticResource SurfaceAlt}"
+                                    Stroke="{StaticResource Border}" StrokeThickness="1">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="16" />
+                                </Border.StrokeShape>
+                                <Image Source="{Binding Icon}" WidthRequest="26" HeightRequest="26"
+                                       HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+                            <Label Text="{Binding Name}" FontSize="10"
+                                   TextColor="{StaticResource TextSecondary}"
+                                   HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- ===== Más modos ===== -->
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Grid.Column="0" Text="Más modos" Style="{StaticResource H2}" />
+                <Label Grid.Column="1" Text="Ver todos" TextColor="{StaticResource PrimaryMuted}" FontSize="12" VerticalOptions="Center" />
+            </Grid>
+
+            <CollectionView ItemsSource="{Binding GameModes}" HeightRequest="176">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"
+                                     HorizontalItemSpacing="12" VerticalItemSpacing="12" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:GameModeItem">
+                        <Border Style="{StaticResource Card}" Padding="13">
+                            <VerticalStackLayout Spacing="8">
+                                <Border HeightRequest="56" BackgroundColor="{StaticResource SurfaceElevated}" StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="12" />
+                                    </Border.StrokeShape>
+                                    <Image Source="{Binding Icon}" WidthRequest="28" HeightRequest="28"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                                <Label Text="{Binding Name}" Style="{StaticResource H2}" FontSize="14" />
+                                <Label Text="{Binding Subtitle}" Style="{StaticResource Caption}" />
+                                <Grid ColumnDefinitions="*,Auto" Margin="0,2,0,0">
+                                    <HorizontalStackLayout Grid.Column="0" Spacing="5" VerticalOptions="Center">
+                                        <Image Source="icon_crown.png" WidthRequest="15" HeightRequest="15" />
+                                        <Label Text="{Binding Plays}" FontSize="12" TextColor="{StaticResource PrimaryLight}" />
+                                    </HorizontalStackLayout>
+                                    <Border Grid.Column="1" WidthRequest="30" HeightRequest="30"
+                                            BackgroundColor="{StaticResource Accent}" StrokeThickness="0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="15" />
+                                        </Border.StrokeShape>
+                                        <Image Source="icon_bolt.png" WidthRequest="16" HeightRequest="16"
+                                               HorizontalOptions="Center" VerticalOptions="Center" />
+                                    </Border>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

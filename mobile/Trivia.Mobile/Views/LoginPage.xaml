@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Trivia.Mobile.ViewModels"
+             x:Class="Trivia.Mobile.Views.LoginPage"
+             x:DataType="vm:LoginViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+
+    <ScrollView Background="{StaticResource PageGradient}">
+        <VerticalStackLayout Padding="24,72,24,24" Spacing="0">
+
+            <Image Source="logo.png" WidthRequest="72" HeightRequest="72" HorizontalOptions="Start" />
+            <Label Text="¡Hola de nuevo!" Style="{StaticResource Display}" Margin="0,20,0,4" />
+            <Label Text="Ingresá para seguir jugando" Style="{StaticResource Caption}" Margin="0,0,0,32" />
+
+            <!-- Email -->
+            <Label Text="Email" Style="{StaticResource Caption}" Margin="4,0,0,6" />
+            <Border Style="{StaticResource Field}">
+                <Entry Placeholder="tucorreo@ejemplo.com"
+                       Keyboard="Email"
+                       Text="{Binding Email}" />
+            </Border>
+
+            <!-- Contraseña -->
+            <Label Text="Contraseña" Style="{StaticResource Caption}" Margin="4,18,0,6" />
+            <Border Style="{StaticResource Field}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Entry Grid.Column="0"
+                           Placeholder="••••••••"
+                           IsPassword="{Binding IsPasswordHidden}"
+                           Text="{Binding Password}" />
+                    <ImageButton Grid.Column="1"
+                                 Source="icon_eye.png"
+                                 WidthRequest="22" HeightRequest="22"
+                                 BackgroundColor="Transparent"
+                                 Command="{Binding TogglePasswordVisibilityCommand}"
+                                 VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="{StaticResource Danger}"
+                   FontSize="13"
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullConverter}}"
+                   Margin="4,12,0,0" />
+
+            <Button Text="Ingresar"
+                    Style="{StaticResource PrimaryButton}"
+                    Command="{Binding SignInCommand}"
+                    Margin="0,28,0,0" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Color="{StaticResource Accent}"
+                               Margin="0,16,0,0" />
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4" Margin="0,28,0,0">
+                <Label Text="¿No tenés cuenta?" Style="{StaticResource Caption}" />
+                <Label Text="Registrate"
+                       TextColor="{StaticResource PrimaryMuted}"
+                       FontFamily="OpenSansSemibold"
+                       FontSize="12">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToRegisterCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

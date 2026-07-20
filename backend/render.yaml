@@ -1,0 +1,30 @@
+# =====================================================================
+# Render Blueprint (Infrastructure as Code).
+# Con este archivo en la raíz del repo, en Render: New > Blueprint,
+# apuntar al repo y se crea el servicio con esta config.
+#
+# La base de datos es Neon (externa a Render), así que NO se declara aquí un
+# recurso `databases:`; solo se referencia vía las variables DATABASE_URL /
+# DIRECT_URL que se cargan como secretos en el dashboard de Render.
+# =====================================================================
+services:
+  - type: web
+    name: battlequiz-api
+    runtime: node
+    plan: free
+    # Si el backend NO está en la raíz del repo sino en /backend, descomentar:
+    # rootDir: backend
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npx prisma migrate deploy && node dist/main
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false   # se completa en el dashboard (Neon pooled connection)
+      - key: DIRECT_URL
+        sync: false   # se completa en el dashboard (Neon direct connection)
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 60m

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Trivia.Mobile.ViewModels"
+             x:Class="Trivia.Mobile.Views.RegisterPage"
+             x:DataType="vm:RegisterViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+
+    <ScrollView Background="{StaticResource PageGradient}">
+        <VerticalStackLayout Padding="24,64,24,24" Spacing="0">
+
+            <Image Source="icon_arrow_left.png" WidthRequest="26" HeightRequest="26" HorizontalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToLoginCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Label Text="Creá tu cuenta" Style="{StaticResource Display}" Margin="0,24,0,4" />
+            <Label Text="Sumate y empezá a competir" Style="{StaticResource Caption}" Margin="0,0,0,32" />
+
+            <Label Text="Nombre" Style="{StaticResource Caption}" Margin="4,0,0,6" />
+            <Border Style="{StaticResource Field}">
+                <Entry Placeholder="Tu nombre" Text="{Binding Name}" />
+            </Border>
+
+            <Label Text="Email" Style="{StaticResource Caption}" Margin="4,18,0,6" />
+            <Border Style="{StaticResource Field}">
+                <Entry Placeholder="tucorreo@ejemplo.com" Keyboard="Email" Text="{Binding Email}" />
+            </Border>
+
+            <Label Text="Contraseña" Style="{StaticResource Caption}" Margin="4,18,0,6" />
+            <Border Style="{StaticResource Field}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Entry Grid.Column="0"
+                           Placeholder="Mínimo 6 caracteres"
+                           IsPassword="{Binding IsPasswordHidden}"
+                           Text="{Binding Password}" />
+                    <ImageButton Grid.Column="1"
+                                 Source="icon_eye.png"
+                                 WidthRequest="22" HeightRequest="22"
+                                 BackgroundColor="Transparent"
+                                 Command="{Binding TogglePasswordVisibilityCommand}"
+                                 VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="{StaticResource Danger}"
+                   FontSize="13"
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullConverter}}"
+                   Margin="4,12,0,0" />
+
+            <Button Text="Crear cuenta"
+                    Style="{StaticResource PrimaryButton}"
+                    Command="{Binding RegisterCommand}"
+                    Margin="0,28,0,0" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Color="{StaticResource Accent}"
+                               Margin="0,16,0,0" />
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4" Margin="0,28,0,0">
+                <Label Text="¿Ya tenés cuenta?" Style="{StaticResource Caption}" />
+                <Label Text="Ingresá"
+                       TextColor="{StaticResource PrimaryMuted}"
+                       FontFamily="OpenSansSemibold"
+                       FontSize="12">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToLoginCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

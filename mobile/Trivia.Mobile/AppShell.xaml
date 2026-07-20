@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:Trivia.Mobile.Views"
+       x:Class="Trivia.Mobile.AppShell"
+       BackgroundColor="{StaticResource BgBase}"
+       FlyoutBehavior="Disabled">
+
+    <!--
+      Splash es la ruta de arranque: decide (según haya sesión) navegar a
+      Login o al TabBar de la app. Login y Registro son rutas fuera del
+      TabBar (sin barra inferior). El TabBar agrupa las 4 secciones con
+      barra inferior, siguiendo el mockup (Explorar / Ranking / Guardados /
+      Ajustes). Jugar, Resultado, Perfil, etc. se registran como rutas de
+      detalle en AppShell.xaml.cs a medida que se construyen.
+    -->
+
+    <ShellContent Route="splash"
+                  ContentTemplate="{DataTemplate views:SplashPage}"
+                  Shell.NavBarIsVisible="False"
+                  Shell.TabBarIsVisible="False" />
+
+    <TabBar Route="main">
+        <Tab Title="Explorar">
+            <ShellContent Route="home" ContentTemplate="{DataTemplate views:HomePage}" />
+        </Tab>
+        <!--
+          Los tabs Ranking / Guardados / Ajustes se agregan cuando esas
+          páginas existan. Se dejan comentados para no romper el build por
+          referenciar vistas aún no creadas.
+        -->
+    </TabBar>
+
+</Shell>

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Trivia.Shared</RootNamespace>
+    <!--
+      Sin dependencias a Domain/Infrastructure a propósito: este proyecto
+      define el contrato de transporte (DTOs) entre Trivia.Api y
+      Trivia.Mobile. Ambos lo referencian; ninguno conoce las entidades
+      de dominio del otro lado.
+    -->
+  </PropertyGroup>
+
+</Project>

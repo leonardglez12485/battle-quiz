@@ -1,0 +1,11 @@
+# .NET (mobile)
+bin/
+obj/
+*.user
+.vs/
+# NestJS (backend)
+node_modules/
+dist/
+coverage/
+.env
+*.log

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Trivia.Mobile.ViewModels"
+             x:Class="Trivia.Mobile.Views.ResultPage"
+             x:DataType="vm:ResultViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+
+    <ScrollView Background="{StaticResource PageGradient}">
+        <VerticalStackLayout Padding="24,64,24,28" Spacing="0" HorizontalOptions="Fill">
+
+            <Label Text="PARTIDA COMPLETADA" Style="{StaticResource Caption}"
+                   HorizontalOptions="Center" />
+
+            <!-- Anillo de puntaje -->
+            <Border WidthRequest="150" HeightRequest="150" Stroke="{StaticResource Success}" StrokeThickness="7"
+                    BackgroundColor="Transparent" HorizontalOptions="Center" Margin="0,22,0,22">
+                <Border.StrokeShape><RoundRectangle CornerRadius="75" /></Border.StrokeShape>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="2">
+                    <Label Text="{Binding ScorePercentLabel}" Style="{StaticResource Display}" FontSize="36"
+                           HorizontalOptions="Center" />
+                    <Label Text="{Binding ScoreFractionLabel}" Style="{StaticResource Caption}"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Estandarte de rango -->
+            <Border BackgroundColor="{StaticResource Primary}" StrokeThickness="0" Padding="0,44,0,22"
+                    WidthRequest="160" HorizontalOptions="Center" Margin="0,0,0,20">
+                <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
+                <VerticalStackLayout Spacing="0" HorizontalOptions="Center">
+                    <Label Text="{Binding PlayerName}" TextColor="{StaticResource BgBase}"
+                           FontFamily="OpenSansSemibold" FontSize="16" HorizontalOptions="Center" />
+                    <Label Text="Puntos" TextColor="{StaticResource BgBase}" FontSize="12" HorizontalOptions="Center" />
+                    <Label Text="{Binding Coins}" TextColor="{StaticResource BgBase}"
+                           FontFamily="OpenSansSemibold" FontSize="32" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Métricas -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="11" Margin="0,0,0,18">
+                <Border Grid.Column="0" Style="{StaticResource Card}" Padding="15">
+                    <VerticalStackLayout Spacing="5">
+                        <Image Source="icon_bolt.png" WidthRequest="18" HeightRequest="18" HorizontalOptions="Start" />
+                        <Label Text="{Binding Xp, StringFormat='+{0}'}" Style="{StaticResource Display}" FontSize="22" />
+                        <Label Text="XP ganada" Style="{StaticResource Muted}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource Card}" Padding="15">
+                    <VerticalStackLayout Spacing="5">
+                        <Image Source="icon_crown.png" WidthRequest="18" HeightRequest="18" HorizontalOptions="Start" />
+                        <Label Text="{Binding Coins, StringFormat='+{0}'}" Style="{StaticResource Display}" FontSize="22" />
+                        <Label Text="Monedas" Style="{StaticResource Muted}" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Logro desbloqueado -->
+            <Border IsVisible="{Binding HasAchievement}" Padding="13" Margin="0,0,0,18"
+                    BackgroundColor="#0FFFC24B" Stroke="#33FFC24B" StrokeThickness="1">
+                <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="11">
+                    <Image Grid.Column="0" Source="icon_crown.png" WidthRequest="26" HeightRequest="26" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                        <Label Text="¡Logro desbloqueado!" FontFamily="OpenSansSemibold" FontSize="13" />
+                        <Label Text="{Binding AchievementName}" Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Button Text="Jugar de nuevo" Style="{StaticResource PrimaryButton}"
+                    Command="{Binding PlayAgainCommand}" Margin="0,6,0,0" />
+            <Button Text="Volver al inicio" Style="{StaticResource GhostButton}"
+                    Command="{Binding GoHomeCommand}" Margin="0,4,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

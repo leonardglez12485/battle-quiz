@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Trivia.Mobile</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <ApplicationTitle>BattleQuiz</ApplicationTitle>
+    <ApplicationId>com.battlequiz.mobile</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+
+    <!--
+      Requiere los workloads MAUI instalados localmente:
+        dotnet workload install maui
+      (no se pueden instalar en el sandbox de este asistente).
+    -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- App icon: fondo violeta + rayo naranja (SVG → se rasteriza en build). -->
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#7C5CFF" />
+
+    <!-- Splash screen. -->
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#160F26" BaseSize="200,200" />
+
+    <!-- Imágenes/íconos SVG (se convierten a PNG por plataforma). -->
+    <MauiImage Include="Resources\Images\*" />
+
+    <!-- Fuentes. OpenSans viene con la plantilla MAUI; TablerIcons es opcional
+         para íconos por fuente (acá los íconos son SVG, así que no es requisito). -->
+    <MauiFont Include="Resources\Fonts\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.10" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Trivia.Shared\Trivia.Shared.csproj" />
+    <!-- Nunca referencia Trivia.Domain ni Trivia.Infrastructure: consume la Api por HTTP. -->
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Paleta BattleQuiz — Modo oscuro premium (violeta de marca + naranja de acción).
+    Único punto de verdad del color. Ninguna vista debería hardcodear hex:
+    todo se referencia con {StaticResource}.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Fondos (de más oscuro a más elevado) -->
+    <Color x:Key="BgDeep">#0D0A16</Color>
+    <Color x:Key="BgBase">#160F26</Color>
+    <Color x:Key="BgHeader">#2A1E4C</Color>
+    <Color x:Key="Surface">#1E1836</Color>
+    <Color x:Key="SurfaceAlt">#241C42</Color>
+    <Color x:Key="SurfaceElevated">#2A2247</Color>
+    <Color x:Key="OptionBg">#1B1530</Color>
+
+    <!-- Marca (violeta) -->
+    <Color x:Key="Primary">#7C5CFF</Color>
+    <Color x:Key="PrimaryLight">#B9A9F0</Color>
+    <Color x:Key="PrimaryMuted">#9E7BFF</Color>
+
+    <!-- Acción (naranja) -->
+    <Color x:Key="Accent">#FB6E2D</Color>
+    <Color x:Key="AccentDark">#2A0F02</Color>
+
+    <!-- Semánticos -->
+    <Color x:Key="Success">#33D6A4</Color>
+    <Color x:Key="SuccessDark">#06382A</Color>
+    <Color x:Key="Danger">#FF5C6C</Color>
+    <Color x:Key="Warning">#FFC24B</Color>
+
+    <!-- Texto -->
+    <Color x:Key="TextPrimary">#F1ECFB</Color>
+    <Color x:Key="TextSecondary">#A99FC4</Color>
+    <Color x:Key="TextMuted">#6C6288</Color>
+
+    <!-- Bordes / líneas -->
+    <Color x:Key="Border">#2A2247</Color>
+    <Color x:Key="BorderSubtle">#241C42</Color>
+
+    <!-- Brushes derivados (para fondos de página con degradé sutil del mockup) -->
+    <LinearGradientBrush x:Key="PageGradient" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#2A1E4C" Offset="0.0" />
+        <GradientStop Color="#160F26" Offset="0.42" />
+        <GradientStop Color="#0D0A16" Offset="1.0" />
+    </LinearGradientBrush>
+
+</ResourceDictionary>

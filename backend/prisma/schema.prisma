@@ -1,0 +1,253 @@
+// =====================================================================
+// BattleQuiz — Esquema Prisma (PostgreSQL / Neon)
+// Normalizado. Catálogos (Category, DifficultyLevel, QuestionType) en
+// tablas propias: nunca hardcodeados. Los `enum` de Postgres se usan solo
+// para mecánicas fijas del producto (GameMode, estados), no para contenido.
+// =====================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL") // pooled (runtime) — Neon -pooler
+  directUrl = env("DIRECT_URL")   // directa (migraciones)
+}
+
+// --------------------------- Catálogos -------------------------------
+
+model Category {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String   @unique @db.VarChar(100)
+  description String?  @db.VarChar(500)
+  iconUrl     String?  @db.VarChar(300)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  questions            Question[]
+  favoriteOfStats      UserStatistics[] @relation("FavoriteCategory")
+  bestOfStats          UserStatistics[] @relation("BestCategory")
+  worstOfStats         UserStatistics[] @relation("WorstCategory")
+
+  @@map("categories")
+}
+
+model DifficultyLevel {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String   @db.VarChar(50)
+  score     Int
+  order     Int      @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
+
+  questions Question[]
+
+  @@map("difficulty_levels")
+}
+
+model QuestionType {
+  id        String   @id @default(uuid()) @db.Uuid
+  code      String   @unique @db.VarChar(50)
+  name      String   @db.VarChar(100)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
+
+  questions Question[]
+
+  @@map("question_types")
+}
+
+// ----------------------- Preguntas / respuestas ---------------------
+
+enum QuestionStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model Question {
+  id                     String         @id @default(uuid()) @db.Uuid
+  categoryId             String         @db.Uuid
+  difficultyLevelId      String         @db.Uuid
+  questionTypeId         String         @db.Uuid
+  text                   String         @db.VarChar(1000)
+  educationalExplanation String?        @db.VarChar(2000)
+  status                 QuestionStatus @default(DRAFT)
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime?      @updatedAt
+
+  category        Category        @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  difficultyLevel DifficultyLevel @relation(fields: [difficultyLevelId], references: [id], onDelete: Restrict)
+  questionType    QuestionType    @relation(fields: [questionTypeId], references: [id], onDelete: Restrict)
+  answers         Answer[]
+  sessionQuestions GameSessionQuestion[]
+
+  // Filtro principal del motor de selección: categoría + dificultad + estado.
+  @@index([categoryId, difficultyLevelId, status])
+  @@map("questions")
+}
+
+model Answer {
+  id         String   @id @default(uuid()) @db.Uuid
+  questionId String   @db.Uuid
+  text       String   @db.VarChar(500)
+  isCorrect  Boolean
+  order      Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime? @updatedAt
+
+  question         Question              @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  sessionQuestions GameSessionQuestion[]
+
+  @@unique([questionId, order])
+  @@index([questionId])
+  @@map("answers")
+}
+
+// ------------------------------ Usuarios ----------------------------
+
+model User {
+  id                 String    @id @default(uuid()) @db.Uuid
+  name               String    @db.VarChar(150)
+  email              String    @unique @db.VarChar(256)
+  passwordHash       String    @db.VarChar(500)
+  avatarUrl          String?   @db.VarChar(300)
+  country            String?   @db.VarChar(100)
+  registeredAt       DateTime  @default(now())
+  level              Int       @default(1)
+  xp                 Int       @default(0)
+  coins              Int       @default(0)
+  currentDailyStreak Int       @default(0)
+  lastPlayedDate     DateTime? @db.Date
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime? @updatedAt
+
+  statistics   UserStatistics?
+  achievements UserAchievement[]
+  gameSessions GameSession[]
+
+  @@map("users")
+}
+
+model UserStatistics {
+  id                        String   @id @default(uuid()) @db.Uuid
+  userId                    String   @unique @db.Uuid
+  questionsAnswered         Int      @default(0)
+  correctAnswers            Int      @default(0)
+  incorrectAnswers          Int      @default(0)
+  averageResponseTimeSec    Float    @default(0)
+  longestStreak             Int      @default(0)
+  favoriteCategoryId        String?  @db.Uuid
+  bestPerformingCategoryId  String?  @db.Uuid
+  worstPerformingCategoryId String?  @db.Uuid
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime? @updatedAt
+
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  favoriteCategory Category? @relation("FavoriteCategory", fields: [favoriteCategoryId], references: [id])
+  bestCategory     Category? @relation("BestCategory", fields: [bestPerformingCategoryId], references: [id])
+  worstCategory    Category? @relation("WorstCategory", fields: [worstPerformingCategoryId], references: [id])
+
+  @@map("user_statistics")
+}
+
+// ------------------------------- Logros -----------------------------
+
+enum AchievementCriteriaType {
+  TOTAL_CORRECT_ANSWERS
+  USER_LEVEL_REACHED
+  DAILY_STREAK_DAYS
+  PERFECT_GAME_PERCENTAGE
+}
+
+model Achievement {
+  id           String                  @id @default(uuid()) @db.Uuid
+  code         String                  @unique @db.VarChar(100)
+  name         String                  @db.VarChar(150)
+  description  String                  @db.VarChar(500)
+  iconUrl      String?                 @db.VarChar(300)
+  criteriaType AchievementCriteriaType
+  targetValue  Int
+  createdAt    DateTime                @default(now())
+  updatedAt    DateTime?               @updatedAt
+
+  userAchievements UserAchievement[]
+
+  @@map("achievements")
+}
+
+model UserAchievement {
+  id            String   @id @default(uuid()) @db.Uuid
+  userId        String   @db.Uuid
+  achievementId String   @db.Uuid
+  unlockedAt    DateTime @default(now())
+  createdAt     DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement Achievement @relation(fields: [achievementId], references: [id], onDelete: Restrict)
+
+  @@unique([userId, achievementId])
+  @@index([userId])
+  @@map("user_achievements")
+}
+
+// ------------------------- Partidas (historial) ---------------------
+
+enum GameMode {
+  CLASSIC
+  SURVIVAL
+  TIME_ATTACK
+  CATEGORY_SPECIFIC
+  DAILY_CHALLENGE
+}
+
+enum GameSessionStatus {
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
+}
+
+model GameSession {
+  id              String            @id @default(uuid()) @db.Uuid
+  userId          String            @db.Uuid
+  mode            GameMode
+  status          GameSessionStatus @default(IN_PROGRESS)
+  startedAt       DateTime          @default(now())
+  completedAt     DateTime?
+  durationSeconds Int               @default(0)
+  xpEarned        Int               @default(0)
+  pointsEarned    Int               @default(0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime?         @updatedAt
+
+  user      User                  @relation(fields: [userId], references: [id], onDelete: Restrict)
+  questions GameSessionQuestion[]
+
+  // Insumo del motor de selección: partidas recientes de un usuario.
+  @@index([userId, startedAt])
+  @@map("game_sessions")
+}
+
+model GameSessionQuestion {
+  id               String   @id @default(uuid()) @db.Uuid
+  gameSessionId    String   @db.Uuid
+  questionId       String   @db.Uuid
+  selectedAnswerId String?  @db.Uuid
+  writtenAnswer    String?  @db.VarChar(500)
+  isCorrect        Boolean
+  timeTakenSeconds Int
+  pointsAwarded    Int      @default(0)
+  order            Int
+  createdAt        DateTime @default(now())
+
+  gameSession    GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+  question       Question    @relation(fields: [questionId], references: [id], onDelete: Restrict)
+  selectedAnswer Answer?     @relation(fields: [selectedAnswerId], references: [id], onDelete: Restrict)
+
+  @@unique([gameSessionId, questionId])
+  @@index([questionId])
+  @@map("game_session_questions")
+}

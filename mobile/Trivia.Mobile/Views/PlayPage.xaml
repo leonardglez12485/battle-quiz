@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Trivia.Mobile.ViewModels"
+             xmlns:models="clr-namespace:Trivia.Mobile.Models"
+             x:Class="Trivia.Mobile.Views.PlayPage"
+             x:Name="Root"
+             x:DataType="vm:PlayViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
+
+    <Grid Background="{StaticResource PageGradient}" RowDefinitions="Auto,*,Auto" Padding="20,56,20,20" RowSpacing="16">
+
+        <!-- ===== Cabecera ===== -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto">
+            <Border Grid.Column="0" WidthRequest="38" HeightRequest="38" BackgroundColor="{StaticResource SurfaceAlt}" StrokeThickness="0">
+                <Border.StrokeShape><RoundRectangle CornerRadius="19" /></Border.StrokeShape>
+                <Image Source="icon_arrow_left.png" WidthRequest="20" HeightRequest="20"
+                       HorizontalOptions="Center" VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding QuitCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Border>
+            <Label Grid.Column="1" Text="{Binding ProgressLabel}" Style="{StaticResource H2}"
+                   HorizontalOptions="Center" VerticalOptions="Center" />
+            <Border Grid.Column="2" WidthRequest="38" HeightRequest="38" BackgroundColor="{StaticResource SurfaceAlt}" StrokeThickness="0">
+                <Border.StrokeShape><RoundRectangle CornerRadius="19" /></Border.StrokeShape>
+                <Image Source="icon_bookmark.png" WidthRequest="20" HeightRequest="20"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+        </Grid>
+
+        <!-- ===== Cuerpo ===== -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="18">
+
+                <!-- Tarjeta de pregunta -->
+                <Border Style="{StaticResource CardAlt}" Padding="20,26" MinimumHeightRequest="120">
+                    <Label Text="{Binding QuestionText}" Style="{StaticResource H1}"
+                           HorizontalTextAlignment="Center" VerticalOptions="Center" />
+                </Border>
+
+                <!-- Barra de tiempo -->
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                    <Label Grid.Column="0" Text="Tiempo" Style="{StaticResource Caption}" VerticalOptions="Center" />
+                    <ProgressBar Grid.Column="1" Progress="{Binding TimeProgress}"
+                                 ProgressColor="{StaticResource Accent}"
+                                 BackgroundColor="{StaticResource OptionBg}"
+                                 HeightRequest="8" VerticalOptions="Center" />
+                    <Label Grid.Column="2" Text="{Binding TimeLabel}" TextColor="{StaticResource Accent}"
+                           FontFamily="OpenSansSemibold" FontSize="14" VerticalOptions="Center" />
+                </Grid>
+
+                <!-- Opciones A/B/C/D -->
+                <CollectionView ItemsSource="{Binding Options}" SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="11" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:AnswerOption">
+                            <Border BackgroundColor="{Binding BackgroundColor}"
+                                    Stroke="{Binding StrokeColor}" StrokeThickness="1" Padding="12">
+                                <Border.StrokeShape><RoundRectangle CornerRadius="15" /></Border.StrokeShape>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={x:Reference Root}, Path=BindingContext.AnswerCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                    <Border Grid.Column="0" WidthRequest="34" HeightRequest="34"
+                                            BackgroundColor="{Binding LetterBackground}" StrokeThickness="0">
+                                        <Border.StrokeShape><RoundRectangle CornerRadius="10" /></Border.StrokeShape>
+                                        <Label Text="{Binding Letter}" TextColor="{Binding LetterTextColor}"
+                                               FontFamily="OpenSansSemibold" FontSize="14"
+                                               HorizontalOptions="Center" VerticalOptions="Center" />
+                                    </Border>
+                                    <Label Grid.Column="1" Text="{Binding Text}" FontSize="15"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Image Grid.Column="2" Source="icon_check.png" WidthRequest="22" HeightRequest="22"
+                                           IsVisible="{Binding ShowCheck}" VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Explicación educativa -->
+                <Border IsVisible="{Binding IsExplanationVisible}" Padding="14"
+                        BackgroundColor="#122E8BFF" Stroke="#332E8BFF" StrokeThickness="1">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Explicación" TextColor="{StaticResource PrimaryLight}" FontSize="12" />
+                        <Label Text="{Binding Explanation}" FontSize="13" TextColor="{StaticResource TextSecondary}" />
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- ===== Pie: comodines / continuar ===== -->
+        <Grid Grid.Row="2">
+            <!-- Comodines (visibles antes de responder) -->
+            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="9" IsVisible="{Binding CanGoNext, Converter={StaticResource InvertedBoolConverter}}">
+                <Button Grid.Column="0" Text="50/50" Style="{StaticResource PrimaryButton}" FontSize="12" HeightRequest="48" Command="{Binding FiftyFiftyCommand}" />
+                <Button Grid.Column="1" Text="Público" Style="{StaticResource PrimaryButton}" FontSize="12" HeightRequest="48" />
+                <Button Grid.Column="2" Text="+Tiempo" Style="{StaticResource PrimaryButton}" FontSize="12" HeightRequest="48" Command="{Binding AddTimeCommand}" />
+                <Button Grid.Column="3" Text="Saltar" Style="{StaticResource PrimaryButton}" FontSize="12" HeightRequest="48" Command="{Binding SkipCommand}" />
+            </Grid>
+            <!-- Continuar (visible después de responder) -->
+            <Button Text="Continuar" Style="{StaticResource PrimaryButton}"
+                    IsVisible="{Binding CanGoNext}" Command="{Binding NextCommand}" />
+        </Grid>
+
+    </Grid>
+</ContentPage>

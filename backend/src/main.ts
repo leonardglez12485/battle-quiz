@@ -29,7 +29,16 @@ async function bootstrap(): Promise<void> {
     .setVersion('1.0')
     .addBearerAuth()
     .build();
-  SwaggerModule.setup('docs', app, SwaggerModule.createDocument(app, config));
+  // Se cargan los assets de Swagger UI desde un CDN. Detrás del proxy de
+  // Render, los estáticos que sirve NestJS por defecto no siempre llegan y la
+  // página queda en blanco; apuntando al CDN se resuelve.
+  SwaggerModule.setup('docs', app, SwaggerModule.createDocument(app, config), {
+    customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui.min.css',
+    customJs: [
+      'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui-bundle.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui-standalone-preset.min.js',
+    ],
+  });
 
   const port = Number(process.env.PORT ?? 3000);
   await app.listen(port, '0.0.0.0');

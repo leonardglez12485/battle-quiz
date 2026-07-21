@@ -5,6 +5,8 @@ import { CurrentUser, JwtAuthGuard } from '../auth/jwt-auth.guard';
 import {
   CompleteGameDto,
   CompleteGameResponse,
+  LifelineDto,
+  LifelineResponse,
   StartGameDto,
   StartGameResponse,
   SubmitAnswerDto,
@@ -34,5 +36,11 @@ export class GameController {
   @HttpCode(HttpStatus.OK)
   complete(@CurrentUser() user: JwtPayload, @Body() dto: CompleteGameDto): Promise<CompleteGameResponse> {
     return this.game.complete(user.sub, dto.sessionId);
+  }
+
+  @Post('lifeline')
+  @HttpCode(HttpStatus.OK)
+  lifeline(@CurrentUser() user: JwtPayload, @Body() dto: LifelineDto): Promise<LifelineResponse> {
+    return this.game.lifeline(user.sub, dto);
   }
 }

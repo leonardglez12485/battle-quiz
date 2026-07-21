@@ -1,4 +1,4 @@
-import { ArrayMaxSize, IsArray, IsEnum, IsInt, IsOptional, IsString, IsUUID, Max, Min } from 'class-validator';
+import { ArrayMaxSize, IsArray, IsEnum, IsIn, IsInt, IsOptional, IsString, IsUUID, Max, Min } from 'class-validator';
 import { GameMode } from 'src/domain/enums';
 
 export class StartGameDto {
@@ -47,6 +47,29 @@ export class SubmitAnswerDto {
 export class CompleteGameDto {
   @IsUUID()
   sessionId!: string;
+}
+
+export class LifelineDto {
+  @IsUUID()
+  sessionId!: string;
+
+  @IsUUID()
+  questionId!: string;
+
+  @IsIn(['fifty_fifty', 'audience'])
+  type!: 'fifty_fifty' | 'audience';
+}
+
+export interface AudienceVote {
+  answerId: string;
+  percent: number;
+}
+
+export interface LifelineResponse {
+  // Para 50/50: ids de respuestas a ocultar (incorrectas).
+  removeAnswerIds?: string[];
+  // Para "Público": distribución de votos por respuesta (suma 100).
+  audience?: AudienceVote[];
 }
 
 // ---- Respuestas (las opciones NUNCA exponen isCorrect al iniciar) ----

@@ -49,6 +49,8 @@ export class CompleteGameDto {
   sessionId!: string;
 }
 
+export type LifelineType = 'fifty_fifty' | 'audience' | 'add_time';
+
 export class LifelineDto {
   @IsUUID()
   sessionId!: string;
@@ -56,8 +58,8 @@ export class LifelineDto {
   @IsUUID()
   questionId!: string;
 
-  @IsIn(['fifty_fifty', 'audience'])
-  type!: 'fifty_fifty' | 'audience';
+  @IsIn(['fifty_fifty', 'audience', 'add_time'])
+  type!: LifelineType;
 }
 
 export interface AudienceVote {
@@ -70,6 +72,11 @@ export interface LifelineResponse {
   removeAnswerIds?: string[];
   // Para "Público": distribución de votos por respuesta (suma 100).
   audience?: AudienceVote[];
+  // Segundos extra que otorga el comodín +Tiempo.
+  addedSeconds?: number;
+  // Costo que se cobró y saldo de monedas resultante.
+  cost: number;
+  coins: number;
 }
 
 // ---- Respuestas (las opciones NUNCA exponen isCorrect al iniciar) ----

@@ -156,35 +156,63 @@ export class GameService {
   }
 
   /**
-   * Comodines que requieren conocer la respuesta correcta: se resuelven en el
-   * servidor para no filtrarla al cliente.
+   * Costo en monedas de cada comodín. Centralizado acá para poder ajustarlo
+   * en un solo lugar (a futuro podría venir de configuración/entorno).
+   */
+  private static readonly LifelineCosts: Record<string, number> = {
+    fifty_fifty: 30,
+    audience: 25,
+    add_time: 15,
+  };
+
+  private static readonly AddTimeSeconds = 10;
+
+  /**
+   * Comodines. Cobran monedas al usuario (en el servidor, atómicamente) y
+   * fallan si el saldo no alcanza. Los que requieren conocer la respuesta
+   * correcta (50/50, público) también se resuelven acá para no filtrarla.
    *  - fifty_fifty: devuelve hasta 2 respuestas incorrectas para ocultar.
-   *  - audience: devuelve una distribución de "votos" sesgada hacia la
-   *    correcta (simula el público), sin decir explícitamente cuál es.
+   *  - audience: devuelve una distribución de "votos" sesgada hacia la correcta.
+   *  - add_time: solo cobra y confirma los segundos extra (la app los aplica).
    */
   async lifeline(userId: string, dto: LifelineDto): Promise<LifelineResponse> {
-    const session = await this.gameSessions.findById(dto.sessionId);
-    if (!session) throw new NotFoundException('La partida no existe.');
-    if (session.userId !== userId) throw new ForbiddenException('La partida no pertenece a este usuario.');
-    if (session.status !== GameSessionStatus.InProgress) {
-      throw new BadRequestException('La partida ya finalizó.');
-    }
+    const cost = GameService.LifelineCosts[dto.type] ?? 0;
 
-    const question = await this.questions.findWithAnswers(dto.questionId);
-    if (!question) throw new NotFoundException('La pregunta no existe.');
+    return this.uow.execute(async (repos) => {
+      const session = await repos.gameSessions.findById(dto.sessionId);
+      if (!session) throw new NotFoundException('La partida no existe.');
+      if (session.userId !== userId) throw new ForbiddenException('La partida no pertenece a este usuario.');
+      if (session.status !== GameSessionStatus.InProgress) {
+        throw new BadRequestException('La partida ya finalizó.');
+      }
 
-    const answers = [...question.answers].sort((a, b) => a.order - b.order);
-    const wrong = answers.filter((a) => !a.isCorrect);
+      const user = await repos.users.findById(userId);
+      if (!user) throw new NotFoundException('El usuario no existe.');
 
-    if (dto.type === 'fifty_fifty') {
-      const shuffled = [...wrong].sort(() => Math.random() - 0.5);
-      // Oculta 2, pero nunca deja menos de 2 opciones visibles.
-      const maxToRemove = Math.max(0, answers.length - 2);
-      const removeAnswerIds = shuffled.slice(0, Math.min(2, maxToRemove)).map((a) => a.id);
-      return { removeAnswerIds };
-    }
+      // Cobro del comodín. Si no alcanza, spendCoins lanza DomainException → 400.
+      user.spendCoins(cost);
+      await repos.users.update(user);
 
-    return { audience: this.buildAudience(answers.map((a) => ({ id: a.id, isCorrect: a.isCorrect }))) };
+      if (dto.type === 'add_time') {
+        return { addedSeconds: GameService.AddTimeSeconds, cost, coins: user.coins };
+      }
+
+      const question = await repos.questions.findWithAnswers(dto.questionId);
+      if (!question) throw new NotFoundException('La pregunta no existe.');
+
+      const answers = [...question.answers].sort((a, b) => a.order - b.order);
+
+      if (dto.type === 'fifty_fifty') {
+        const wrong = answers.filter((a) => !a.isCorrect);
+        const shuffled = [...wrong].sort(() => Math.random() - 0.5);
+        const maxToRemove = Math.max(0, answers.length - 2);
+        const removeAnswerIds = shuffled.slice(0, Math.min(2, maxToRemove)).map((a) => a.id);
+        return { removeAnswerIds, cost, coins: user.coins };
+      }
+
+      const audience = this.buildAudience(answers.map((a) => ({ id: a.id, isCorrect: a.isCorrect })));
+      return { audience, cost, coins: user.coins };
+    });
   }
 
   /** Reparte 100% sesgando hacia la(s) correcta(s); devuelve enteros que suman 100. */

@@ -157,6 +157,206 @@ q('Cultura General', 2, '¿Cuántos colores tiene el arcoíris?', 'Tradicionalme
 q('Cultura General', 3, '¿En qué país se encuentra la Torre Eiffel?', 'Está en París, Francia; se construyó para la Exposición Universal de 1889.', 'Francia', 'Italia', 'Bélgica', 'Suiza');
 q('Cultura General', 5, '¿Cuál es el idioma con más hablantes nativos del mundo?', 'El chino mandarín supera los 900 millones de hablantes nativos.', 'Chino mandarín', 'Inglés', 'Español', 'Hindi');
 
+// ===================== LOTE 2: más preguntas =====================
+
+// -------- Historia --------
+q('Historia', 1, '¿En qué continente se originó el Antiguo Egipto?', 'El Antiguo Egipto se desarrolló a orillas del río Nilo, en el noreste de África.', 'África', 'Asia', 'Europa', 'Oceanía');
+q('Historia', 2, '¿Qué muro dividió una ciudad alemana durante la Guerra Fría?', 'El Muro de Berlín dividió la ciudad entre 1961 y 1989.', 'El Muro de Berlín', 'La Línea Maginot', 'El Muro de Adriano', 'La Gran Muralla');
+q('Historia', 2, '¿Quién lideró la Revolución cubana que triunfó en 1959?', 'Fidel Castro encabezó la revolución que derrocó a Fulgencio Batista.', 'Fidel Castro', 'Ernesto Che Guevara', 'Camilo Cienfuegos', 'José Martí');
+q('Historia', 3, '¿En qué año comenzó la Segunda Guerra Mundial?', 'Comenzó en 1939 con la invasión alemana a Polonia.', '1939', '1941', '1936', '1945');
+q('Historia', 3, '¿Qué imperio construyó el Coliseo?', 'El Coliseo romano se inauguró hacia el año 80 d.C.', 'Imperio romano', 'Imperio griego', 'Imperio persa', 'Imperio bizantino');
+q('Historia', 4, '¿Qué revolución comenzó en 1789 con la toma de la Bastilla?', 'La Revolución Francesa transformó Europa a fines del siglo XVIII.', 'La Revolución Francesa', 'La Revolución Rusa', 'La Revolución Industrial', 'La Revolución de Mayo');
+q('Historia', 4, '¿Quién escribió "El Príncipe" en el siglo XVI?', 'Nicolás Maquiavelo escribió este tratado político en 1513.', 'Nicolás Maquiavelo', 'Tomás Moro', 'Voltaire', 'John Locke');
+q('Historia', 5, '¿Qué faraón mandó construir los templos de Abu Simbel?', 'Ramsés II los ordenó erigir en el siglo XIII a.C.', 'Ramsés II', 'Tutankamón', 'Keops', 'Akenatón');
+tf('Historia', 2, 'Cristóbal Colón llegó a América en 1492.', 'Colón arribó el 12 de octubre de 1492.', true);
+tf('Historia', 3, 'La independencia de Estados Unidos se declaró en 1776.', 'La Declaración de Independencia se firmó el 4 de julio de 1776.', true);
+
+// -------- Geografía --------
+q('Geografía', 1, '¿Cuál es el océano más grande del mundo?', 'El océano Pacífico es el más extenso y profundo.', 'Pacífico', 'Atlántico', 'Índico', 'Ártico');
+q('Geografía', 2, '¿Cuál es el país más grande del mundo por superficie?', 'Rusia es el país más extenso y abarca dos continentes.', 'Rusia', 'Canadá', 'China', 'Estados Unidos');
+q('Geografía', 2, '¿Cuál es la capital de Japón?', 'Tokio es la capital y la ciudad más poblada de Japón.', 'Tokio', 'Kioto', 'Osaka', 'Nagoya');
+q('Geografía', 3, '¿Cuál es la montaña más alta de América?', 'El Aconcagua, en Argentina, mide 6.961 m.', 'Aconcagua', 'Everest', 'Kilimanjaro', 'Mont Blanc');
+q('Geografía', 3, '¿Qué línea imaginaria divide la Tierra en hemisferio norte y sur?', 'El ecuador está a 0° de latitud.', 'El ecuador', 'El meridiano de Greenwich', 'El trópico de Cáncer', 'La eclíptica');
+q('Geografía', 4, '¿Cuál es el país más pequeño del mundo?', 'La Ciudad del Vaticano, con apenas 0,44 km².', 'La Ciudad del Vaticano', 'Mónaco', 'San Marino', 'Nauru');
+q('Geografía', 4, '¿Qué mar separa Europa de África?', 'El mar Mediterráneo separa el sur de Europa del norte de África.', 'Mar Mediterráneo', 'Mar Rojo', 'Mar Negro', 'Mar Báltico');
+q('Geografía', 5, '¿Cuál es el lago más profundo del mundo?', 'El lago Baikal, en Siberia, supera los 1.600 m de profundidad.', 'Lago Baikal', 'Lago Titicaca', 'Mar Caspio', 'Lago Victoria');
+tf('Geografía', 2, 'Australia es a la vez un país y un continente.', 'Australia ocupa todo el continente homónimo.', true);
+tf('Geografía', 1, 'El Sahara es un desierto ubicado en África.', 'El Sahara es el mayor desierto cálido y está en el norte de África.', true);
+
+// -------- Matemáticas --------
+q('Matemáticas', 1, '¿Cuánto es 15 + 27?', 'Quince más veintisiete es 42.', '42', '32', '41', '52');
+q('Matemáticas', 1, '¿Cuántos lados tiene un triángulo?', 'Un triángulo tiene 3 lados.', '3', '4', '5', '2');
+q('Matemáticas', 2, '¿Cuál es el resultado de 12 al cuadrado?', 'Doce por doce es 144.', '144', '124', '122', '156');
+q('Matemáticas', 2, '¿Cuánto es la mitad de 150?', 'La mitad de 150 es 75.', '75', '70', '80', '65');
+q('Matemáticas', 3, '¿Cuánto es la raíz cuadrada de 81?', 'La raíz cuadrada de 81 es 9.', '9', '8', '7', '18');
+q('Matemáticas', 3, '¿Cuántos grados suman los ángulos internos de un triángulo?', 'Siempre suman 180 grados.', '180', '360', '90', '270');
+q('Matemáticas', 4, '¿Cómo se llama un número divisible solo por 1 y por sí mismo?', 'Se llama número primo.', 'Número primo', 'Número par', 'Número compuesto', 'Número racional');
+q('Matemáticas', 4, '¿Cuál es el valor aproximado del número "e"?', 'La base del logaritmo natural vale unos 2,718.', '2,718', '3,141', '1,618', '1,414');
+q('Matemáticas', 5, '¿Qué teorema relaciona los lados de un triángulo rectángulo?', 'El de Pitágoras: a² + b² = c².', 'Teorema de Pitágoras', 'Teorema de Tales', 'Teorema de Fermat', 'Teorema de Euclides');
+tf('Matemáticas', 2, 'El número cero es par.', 'El cero es divisible por 2 sin resto, así que es par.', true);
+
+// -------- Deportes --------
+q('Deportes', 1, '¿Con qué parte del cuerpo NO puede tocar la pelota un jugador de campo en fútbol?', 'No puede usar las manos ni los brazos; solo el arquero puede.', 'Las manos', 'Los pies', 'La cabeza', 'El pecho');
+q('Deportes', 2, '¿Cada cuántos años se celebran los Juegos Olímpicos de verano?', 'Se celebran cada 4 años.', '4 años', '2 años', '3 años', '5 años');
+q('Deportes', 2, '¿En qué deporte destaca Rafael Nadal?', 'Nadal es una leyenda del tenis, rey de la tierra batida.', 'Tenis', 'Fútbol', 'Baloncesto', 'Golf');
+q('Deportes', 3, '¿Cuántos jugadores tiene un equipo de baloncesto en cancha?', 'Cinco jugadores por equipo.', '5', '6', '7', '4');
+q('Deportes', 3, '¿Qué país ganó más Mundiales de fútbol?', 'Brasil, con 5 títulos.', 'Brasil', 'Alemania', 'Italia', 'Argentina');
+q('Deportes', 4, '¿En qué ciudad se celebraron los primeros Juegos Olímpicos modernos, en 1896?', 'Se realizaron en Atenas, Grecia.', 'Atenas', 'París', 'Londres', 'Roma');
+q('Deportes', 4, '¿Cuántos puntos vale un touchdown en el fútbol americano?', 'Un touchdown vale 6 puntos.', '6', '7', '3', '5');
+q('Deportes', 5, '¿Quién tiene el récord de más medallas olímpicas de la historia?', 'El nadador Michael Phelps, con 28 medallas.', 'Michael Phelps', 'Usain Bolt', 'Carl Lewis', 'Larisa Latínina');
+tf('Deportes', 2, 'Un partido de fútbol dura 90 minutos en dos tiempos de 45.', 'Son dos tiempos de 45 minutos más descuentos.', true);
+tf('Deportes', 3, 'El maratón olímpico mide 42,195 kilómetros.', 'Esa es la distancia oficial del maratón.', true);
+
+// -------- Tecnología --------
+q('Tecnología', 2, '¿Qué empresa desarrolla el sistema operativo Windows?', 'Windows es de Microsoft.', 'Microsoft', 'Apple', 'Google', 'IBM');
+q('Tecnología', 2, '¿Qué significan las siglas "GPS"?', 'Global Positioning System, o Sistema de Posicionamiento Global.', 'Global Positioning System', 'General Position Service', 'Global Personal System', 'Geo Positioning Sensor');
+q('Tecnología', 3, '¿Quién fundó Microsoft junto a Paul Allen?', 'Bill Gates cofundó Microsoft en 1975.', 'Bill Gates', 'Steve Jobs', 'Elon Musk', 'Mark Zuckerberg');
+q('Tecnología', 3, '¿Qué red social fundó Mark Zuckerberg en 2004?', 'Fundó Facebook mientras estudiaba en Harvard.', 'Facebook', 'Twitter', 'Instagram', 'TikTok');
+q('Tecnología', 4, '¿En qué año se fundó Google?', 'Google nació en 1998.', '1998', '2004', '1995', '2001');
+q('Tecnología', 4, '¿Qué tecnología conecta dispositivos sin cables a corta distancia?', 'El Bluetooth permite conexiones inalámbricas cercanas.', 'Bluetooth', 'Ethernet', 'HDMI', 'USB');
+q('Tecnología', 5, '¿Qué significan las siglas "IA" en tecnología?', 'Inteligencia Artificial.', 'Inteligencia Artificial', 'Internet Avanzado', 'Interfaz Automática', 'Información Analítica');
+tf('Tecnología', 2, 'Un kilobyte es más grande que un byte.', 'Un kilobyte equivale a 1024 bytes.', true);
+
+// -------- Informática --------
+q('Informática', 2, '¿Qué lenguaje estructura el contenido de una página web?', 'HTML define la estructura del contenido.', 'HTML', 'CSS', 'Java', 'SQL');
+q('Informática', 2, '¿Qué componente almacena datos de forma permanente en una PC?', 'El disco duro o SSD guarda los datos aunque se apague.', 'El disco duro', 'La memoria RAM', 'El procesador', 'La fuente');
+q('Informática', 3, '¿Qué significan las siglas "RAM"?', 'Random Access Memory, la memoria de acceso aleatorio.', 'Random Access Memory', 'Read Access Memory', 'Rapid Available Memory', 'Random Available Module');
+q('Informática', 3, '¿En qué sistema de numeración trabajan internamente las computadoras?', 'En binario, base 2 (ceros y unos).', 'Binario', 'Decimal', 'Hexadecimal', 'Octal');
+q('Informática', 4, '¿Qué lenguaje de programación creó Guido van Rossum?', 'Creó Python a inicios de los años 90.', 'Python', 'Java', 'C++', 'Ruby');
+q('Informática', 4, '¿Qué significan las siglas "URL"?', 'Uniform Resource Locator: la dirección de un recurso web.', 'Uniform Resource Locator', 'Universal Reference Link', 'Unified Routing Language', 'User Resource Locator');
+q('Informática', 5, '¿Qué algoritmo de ordenamiento usa "divide y vencerás" con complejidad O(n log n)?', 'El Merge Sort divide, ordena y mezcla.', 'Merge Sort', 'Bubble Sort', 'Insertion Sort', 'Selection Sort');
+tf('Informática', 3, 'HTML es un lenguaje de programación.', 'Falso: HTML es un lenguaje de marcado, no de programación.', false);
+
+// -------- Física --------
+q('Física', 1, '¿Qué fuerza nos mantiene pegados al suelo?', 'La gravedad atrae los cuerpos hacia la Tierra.', 'La gravedad', 'El magnetismo', 'La fricción', 'La electricidad');
+q('Física', 2, '¿Qué instrumento mide la temperatura?', 'El termómetro mide la temperatura.', 'El termómetro', 'El barómetro', 'El higrómetro', 'El velocímetro');
+q('Física', 3, '¿Cuál es la unidad de energía en el Sistema Internacional?', 'El joule (J) es la unidad de energía.', 'Joule', 'Newton', 'Vatio', 'Amperio');
+q('Física', 3, '¿Qué científico formuló las tres leyes del movimiento?', 'Isaac Newton las publicó en 1687.', 'Isaac Newton', 'Galileo Galilei', 'Nikola Tesla', 'Michael Faraday');
+q('Física', 4, '¿Qué partícula subatómica tiene carga negativa?', 'El electrón tiene carga negativa.', 'El electrón', 'El protón', 'El neutrón', 'El fotón');
+q('Física', 4, '¿Cómo se llama la energía asociada al movimiento?', 'La energía cinética depende de la masa y la velocidad.', 'Energía cinética', 'Energía potencial', 'Energía térmica', 'Energía nuclear');
+q('Física', 5, '¿Qué ecuación de Einstein relaciona masa y energía?', 'E = mc² expresa la equivalencia entre masa y energía.', 'E = mc²', 'F = ma', 'V = IR', 'PV = nRT');
+tf('Física', 2, 'La luz viaja más rápido que el sonido.', 'La luz (300.000 km/s) es muchísimo más veloz que el sonido.', true);
+
+// -------- Química --------
+q('Química', 1, '¿Qué gas necesitamos para respirar?', 'El oxígeno es esencial para la respiración.', 'Oxígeno', 'Nitrógeno', 'Dióxido de carbono', 'Helio');
+q('Química', 2, '¿Cuál es el símbolo químico del oxígeno?', 'El oxígeno se representa con la letra O.', 'O', 'Ox', 'Og', 'Ox2');
+q('Química', 3, '¿Cuál es el único metal líquido a temperatura ambiente?', 'El mercurio es líquido a temperatura ambiente.', 'Mercurio', 'Plomo', 'Hierro', 'Estaño');
+q('Química', 3, '¿Qué mide la escala de pH?', 'Mide la acidez o alcalinidad de una sustancia.', 'La acidez o alcalinidad', 'La temperatura', 'La densidad', 'La presión');
+q('Química', 4, '¿Qué elemento es la base de la química orgánica y de la vida?', 'El carbono forma las moléculas de la vida.', 'Carbono', 'Oxígeno', 'Silicio', 'Nitrógeno');
+q('Química', 5, '¿Quién organizó la primera tabla periódica moderna?', 'Dmitri Mendeléyev, en 1869.', 'Dmitri Mendeléyev', 'Antoine Lavoisier', 'Marie Curie', 'John Dalton');
+tf('Química', 2, 'El diamante y el grafito están hechos del mismo elemento.', 'Ambos son carbono puro con distinta estructura.', true);
+
+// -------- Biología --------
+q('Biología', 1, '¿Cuántos pulmones tiene el ser humano?', 'Tenemos dos pulmones.', '2', '1', '3', '4');
+q('Biología', 2, '¿Cuál es el órgano más grande del cuerpo humano?', 'La piel es el órgano más extenso.', 'La piel', 'El hígado', 'El intestino', 'El corazón');
+q('Biología', 2, '¿Qué parte de la planta realiza principalmente la fotosíntesis?', 'Las hojas captan la luz para la fotosíntesis.', 'Las hojas', 'Las raíces', 'El tallo', 'Las flores');
+q('Biología', 3, '¿Cuántos huesos tiene aproximadamente un adulto humano?', 'El cuerpo adulto tiene unos 206 huesos.', '206', '300', '150', '250');
+q('Biología', 3, '¿Cómo se llaman los animales que comen solo plantas?', 'Se los llama herbívoros.', 'Herbívoros', 'Carnívoros', 'Omnívoros', 'Insectívoros');
+q('Biología', 4, '¿Qué científico propuso la evolución por selección natural?', 'Charles Darwin, en "El origen de las especies" (1859).', 'Charles Darwin', 'Gregor Mendel', 'Louis Pasteur', 'Alexander Fleming');
+q('Biología', 4, '¿Cuál es la unidad básica de la vida?', 'La célula es la unidad básica de todo ser vivo.', 'La célula', 'El átomo', 'El tejido', 'El órgano');
+q('Biología', 5, '¿En qué orgánulo se produce la mayor parte de la energía celular (ATP)?', 'Las mitocondrias son la "central energética" de la célula.', 'Las mitocondrias', 'El núcleo', 'Los ribosomas', 'El aparato de Golgi');
+tf('Biología', 2, 'El corazón humano tiene cuatro cavidades.', 'Dos aurículas y dos ventrículos.', true);
+
+// -------- Astronomía --------
+q('Astronomía', 1, '¿Alrededor de qué gira la Tierra?', 'La Tierra orbita alrededor del Sol.', 'El Sol', 'La Luna', 'Marte', 'La Vía Láctea');
+q('Astronomía', 1, '¿Cuál es el satélite natural de la Tierra?', 'La Luna es el único satélite natural de la Tierra.', 'La Luna', 'Fobos', 'Titán', 'Europa');
+q('Astronomía', 2, '¿Cuál es el planeta más cercano al Sol?', 'Mercurio es el planeta más próximo al Sol.', 'Mercurio', 'Venus', 'La Tierra', 'Marte');
+q('Astronomía', 3, '¿Cuántos planetas tiene el Sistema Solar?', 'Ocho, desde que Plutón pasó a planeta enano en 2006.', '8', '9', '7', '10');
+q('Astronomía', 3, '¿Qué planeta tiene los anillos más visibles?', 'Saturno es famoso por sus anillos.', 'Saturno', 'Júpiter', 'Urano', 'Neptuno');
+q('Astronomía', 4, '¿Quién fue la primera persona en pisar la Luna?', 'Neil Armstrong, el 20 de julio de 1969.', 'Neil Armstrong', 'Buzz Aldrin', 'Yuri Gagarin', 'Michael Collins');
+q('Astronomía', 5, '¿Qué telescopio espacial, lanzado en 2021, sucedió al Hubble como el más potente?', 'El telescopio James Webb observa en infrarrojo.', 'James Webb', 'Kepler', 'Spitzer', 'Chandra');
+tf('Astronomía', 2, 'El Sol es una estrella.', 'El Sol es una estrella enana amarilla.', true);
+
+// -------- Literatura --------
+q('Literatura', 1, '¿Quién escribió "Romeo y Julieta"?', 'La tragedia es de William Shakespeare.', 'William Shakespeare', 'Charles Dickens', 'Oscar Wilde', 'Edgar Allan Poe');
+q('Literatura', 2, '¿Quién escribió "La Odisea"?', 'Se atribuye a Homero, poeta de la antigua Grecia.', 'Homero', 'Virgilio', 'Sófocles', 'Platón');
+q('Literatura', 3, '¿Qué autor argentino escribió "Ficciones"?', 'Jorge Luis Borges publicó "Ficciones" en 1944.', 'Jorge Luis Borges', 'Julio Cortázar', 'Ernesto Sabato', 'Adolfo Bioy Casares');
+q('Literatura', 3, '¿Cómo se llama el mago protagonista de la saga de J. K. Rowling?', 'Harry Potter es el joven mago de la saga.', 'Harry Potter', 'Frodo Bolsón', 'Gandalf', 'Percy Jackson');
+q('Literatura', 4, '¿Quién escribió "La Divina Comedia"?', 'Dante Alighieri la escribió en el siglo XIV.', 'Dante Alighieri', 'Petrarca', 'Boccaccio', 'Maquiavelo');
+q('Literatura', 4, '¿Qué poeta chileno ganó el Nobel de Literatura en 1971?', 'Pablo Neruda recibió el Nobel en 1971.', 'Pablo Neruda', 'Gabriela Mistral', 'Octavio Paz', 'César Vallejo');
+q('Literatura', 5, '¿Quién escribió "En busca del tiempo perdido"?', 'Marcel Proust, en siete volúmenes.', 'Marcel Proust', 'James Joyce', 'Franz Kafka', 'Fiódor Dostoyevski');
+tf('Literatura', 3, 'Gabriel García Márquez era colombiano.', 'Nació en Aracataca, Colombia, en 1927.', true);
+
+// -------- Arte --------
+q('Arte', 2, '¿Quién esculpió el "David" de mármol?', 'Miguel Ángel lo esculpió entre 1501 y 1504.', 'Miguel Ángel', 'Donatello', 'Bernini', 'Rodin');
+q('Arte', 2, '¿Qué color resulta de mezclar azul y amarillo?', 'La mezcla de azul y amarillo da verde.', 'Verde', 'Naranja', 'Violeta', 'Marrón');
+q('Arte', 3, '¿Qué artista español cofundó el cubismo?', 'Pablo Picasso, junto a Georges Braque.', 'Pablo Picasso', 'Salvador Dalí', 'Joan Miró', 'Francisco Goya');
+q('Arte', 3, '¿En qué museo de París se exhibe la Mona Lisa?', 'La Mona Lisa está en el Museo del Louvre.', 'El Louvre', 'El Prado', 'El Reina Sofía', 'El MoMA');
+q('Arte', 4, '¿Qué pintor neerlandés pintó "La joven de la perla"?', 'Johannes Vermeer la pintó hacia 1665.', 'Johannes Vermeer', 'Rembrandt', 'Van Gogh', 'Rubens');
+q('Arte', 4, '¿A qué corriente artística pertenece Claude Monet?', 'Monet fue un maestro del impresionismo.', 'Impresionismo', 'Cubismo', 'Surrealismo', 'Barroco');
+q('Arte', 5, '¿Quién pintó el techo de la Capilla Sixtina?', 'Miguel Ángel, entre 1508 y 1512.', 'Miguel Ángel', 'Rafael', 'Leonardo da Vinci', 'Botticelli');
+tf('Arte', 2, 'Vincent van Gogh vendió muy pocos cuadros mientras vivió.', 'Su fama llegó tras su muerte; en vida vendió muy poco.', true);
+
+// -------- Música --------
+q('Música', 1, '¿Qué instrumento tiene teclas blancas y negras?', 'El piano combina teclas blancas y negras.', 'El piano', 'La guitarra', 'El violín', 'La flauta');
+q('Música', 2, '¿Cuántas cuerdas tiene un violín?', 'El violín tiene cuatro cuerdas.', '4', '6', '5', '3');
+q('Música', 3, '¿De qué país eran los Beatles?', 'Eran de Liverpool, Reino Unido.', 'Reino Unido', 'Estados Unidos', 'Australia', 'Irlanda');
+q('Música', 3, '¿Cómo se llama la voz masculina más aguda?', 'La voz de tenor es la más aguda entre las masculinas.', 'Tenor', 'Bajo', 'Barítono', 'Contralto');
+q('Música', 4, '¿Qué compositor austríaco escribió "La flauta mágica"?', 'Wolfgang Amadeus Mozart la estrenó en 1791.', 'Mozart', 'Beethoven', 'Haydn', 'Strauss');
+q('Música', 4, '¿Qué cantante es conocido como el "Rey del Pop"?', 'Michael Jackson recibió ese apodo.', 'Michael Jackson', 'Elvis Presley', 'Prince', 'Freddie Mercury');
+q('Música', 5, '¿Cuántas sinfonías completó Beethoven?', 'Beethoven completó nueve sinfonías.', '9', '5', '7', '12');
+tf('Música', 2, 'La guitarra eléctrica necesita un amplificador para sonar fuerte.', 'Sus pastillas requieren amplificación para proyectar el sonido.', true);
+
+// -------- Cine --------
+q('Cine', 1, '¿Cómo se llama el ratón más famoso de Disney?', 'Mickey Mouse debutó en 1928.', 'Mickey Mouse', 'Jerry', 'Stuart Little', 'Speedy González');
+q('Cine', 2, '¿En qué saga aparece el personaje Darth Vader?', 'Darth Vader es de Star Wars.', 'Star Wars', 'Star Trek', 'Matrix', 'Dune');
+q('Cine', 2, '¿Qué estudio de animación creó "Toy Story"?', 'Pixar la estrenó en 1995.', 'Pixar', 'DreamWorks', 'Warner', 'Universal');
+q('Cine', 3, '¿Quién dirigió "Pulp Fiction"?', 'Quentin Tarantino la dirigió en 1994.', 'Quentin Tarantino', 'Martin Scorsese', 'Steven Spielberg', 'Los hermanos Coen');
+q('Cine', 3, '¿En qué saga aparece el personaje Jack Sparrow?', 'Jack Sparrow es de "Piratas del Caribe".', 'Piratas del Caribe', 'El señor de los anillos', 'Indiana Jones', 'Mad Max');
+q('Cine', 4, '¿Quién dirigió "El Padrino"?', 'Francis Ford Coppola la dirigió en 1972.', 'Francis Ford Coppola', 'Martin Scorsese', 'Brian De Palma', 'Sergio Leone');
+q('Cine', 5, '¿Qué película surcoreana ganó el Óscar a Mejor Película en 2020?', '"Parásitos", de Bong Joon-ho, fue la primera en habla no inglesa en lograrlo.', 'Parásitos', '1917', 'Joker', 'Roma');
+tf('Cine', 2, '"El Rey León" es una película animada de Disney.', 'Se estrenó en 1994 y es un clásico de Disney.', true);
+
+// -------- Videojuegos --------
+q('Videojuegos', 2, '¿Qué compañía creó la consola PlayStation?', 'PlayStation es de Sony.', 'Sony', 'Microsoft', 'Nintendo', 'Sega');
+q('Videojuegos', 2, '¿Cómo se llama el erizo azul mascota de Sega?', 'Sonic es la mascota de Sega.', 'Sonic', 'Tails', 'Knuckles', 'Crash');
+q('Videojuegos', 3, '¿En qué juego construís y explorás mundos hechos de bloques?', 'Minecraft es el famoso juego de bloques.', 'Minecraft', 'Fortnite', 'Roblox', 'Terraria');
+q('Videojuegos', 3, '¿Qué compañía creó la consola Xbox?', 'Xbox es de Microsoft.', 'Microsoft', 'Sony', 'Nintendo', 'Atari');
+q('Videojuegos', 4, '¿Cómo se llama la princesa que suele rescatar Mario?', 'La princesa Peach del Reino Champiñón.', 'La princesa Peach', 'Zelda', 'Daisy', 'Rosalina');
+q('Videojuegos', 4, '¿Qué juego de battle royale lanzó Epic Games en 2017?', 'Fortnite popularizó el género battle royale.', 'Fortnite', 'PUBG', 'Apex Legends', 'Warzone');
+q('Videojuegos', 5, '¿Qué videojuego arcade de comer puntos se lanzó en 1980?', 'Pac-Man se convirtió en un ícono de los arcades.', 'Pac-Man', 'Space Invaders', 'Donkey Kong', 'Tetris');
+tf('Videojuegos', 2, 'Tetris fue creado por un programador soviético.', 'Alekséi Pázhitnov lo creó en 1984 en la URSS.', true);
+
+// -------- Gastronomía --------
+q('Gastronomía', 2, '¿De qué país es originario el sushi?', 'El sushi proviene de Japón.', 'Japón', 'China', 'Corea', 'Tailandia');
+q('Gastronomía', 2, '¿Cuál es el ingrediente principal del pan?', 'El pan se hace principalmente con harina.', 'La harina', 'El azúcar', 'El arroz', 'La papa');
+q('Gastronomía', 3, '¿Qué fruta se usa para elaborar el vino?', 'El vino se hace fermentando uvas.', 'La uva', 'La manzana', 'La pera', 'La ciruela');
+q('Gastronomía', 3, '¿De qué país es originario el croissant tal como lo conocemos?', 'Se popularizó en Francia, inspirado en el kipferl austríaco.', 'Francia', 'Italia', 'España', 'Alemania');
+q('Gastronomía', 4, '¿De qué país es típico el plato "paella"?', 'La paella es originaria de Valencia, España.', 'España', 'México', 'Portugal', 'Italia');
+q('Gastronomía', 4, '¿Qué bebida se obtiene tostando y moliendo granos para luego infusionarlos?', 'El café se prepara con granos tostados y molidos.', 'El café', 'El té', 'El mate', 'El cacao');
+q('Gastronomía', 5, '¿Qué hongo comestible es de los más caros y se busca con cerdos o perros?', 'La trufa es un hongo subterráneo muy cotizado.', 'La trufa', 'El champiñón', 'El shiitake', 'El portobello');
+tf('Gastronomía', 2, 'El tomate es botánicamente una fruta.', 'Al provenir de la flor y tener semillas, es una fruta.', true);
+
+// -------- Animales --------
+q('Animales', 1, '¿Cuál es el animal más grande del mundo?', 'La ballena azul puede superar los 30 metros.', 'La ballena azul', 'El elefante', 'La jirafa', 'El tiburón blanco');
+q('Animales', 2, '¿Qué insecto produce miel?', 'Las abejas producen miel.', 'La abeja', 'La avispa', 'La hormiga', 'La mosca');
+q('Animales', 2, '¿Cuántas patas tiene un insecto?', 'Los insectos tienen seis patas.', '6', '8', '4', '10');
+q('Animales', 3, '¿Cuál es el mamífero terrestre más alto?', 'La jirafa alcanza casi 6 metros de altura.', 'La jirafa', 'El elefante', 'El oso polar', 'El camello');
+q('Animales', 3, '¿Qué ave no vuela pero corre a gran velocidad?', 'El avestruz corre hasta 70 km/h.', 'El avestruz', 'El águila', 'El colibrí', 'El halcón');
+q('Animales', 4, '¿Cómo se llama un grupo de leones?', 'Un grupo de leones se llama manada.', 'Manada', 'Bandada', 'Cardumen', 'Enjambre');
+q('Animales', 5, '¿Cuál es el único mamífero capaz de volar realmente?', 'El murciélago vuela de forma activa; otros solo planean.', 'El murciélago', 'La ardilla voladora', 'El colugo', 'El petauro');
+tf('Animales', 2, 'Los murciélagos son ciegos.', 'Falso: ven y además se orientan por ecolocalización.', false);
+
+// -------- Naturaleza --------
+q('Naturaleza', 1, '¿Qué necesitan las plantas, además de agua y aire, para crecer?', 'Necesitan luz solar para la fotosíntesis.', 'Luz solar', 'Oscuridad', 'Sal', 'Plástico');
+q('Naturaleza', 2, '¿Qué capa de la atmósfera nos protege de los rayos ultravioleta?', 'La capa de ozono filtra la radiación UV.', 'La capa de ozono', 'La troposfera', 'La ionosfera', 'La mesosfera');
+q('Naturaleza', 3, '¿Cómo se llama un temblor de la corteza terrestre?', 'Un terremoto o sismo.', 'Terremoto', 'Tsunami', 'Huracán', 'Tornado');
+q('Naturaleza', 3, '¿Qué gas absorben las plantas del aire para la fotosíntesis?', 'Absorben dióxido de carbono (CO₂).', 'Dióxido de carbono', 'Oxígeno', 'Nitrógeno', 'Hidrógeno');
+q('Naturaleza', 4, '¿Qué escala mide la magnitud de los terremotos?', 'La escala de Richter (y la de magnitud de momento).', 'Escala de Richter', 'Escala Celsius', 'Escala Beaufort', 'Escala Kelvin');
+q('Naturaleza', 5, '¿Cuál es la mayor barrera de coral del mundo?', 'La Gran Barrera de Coral, en Australia.', 'La Gran Barrera de Coral', 'El arrecife de Belice', 'Las Maldivas', 'El Mar Rojo');
+tf('Naturaleza', 2, 'Un año luz es una unidad de distancia.', 'Mide la distancia que recorre la luz en un año, no tiempo.', true);
+
+// -------- Cultura General --------
+q('Cultura General', 1, '¿Cuántos minutos tiene una hora?', 'Una hora tiene 60 minutos.', '60', '100', '30', '90');
+q('Cultura General', 1, '¿De qué color es el cielo despejado durante el día?', 'El cielo diurno despejado se ve azul.', 'Azul', 'Verde', 'Rojo', 'Amarillo');
+q('Cultura General', 2, '¿En qué planeta vivimos?', 'Vivimos en el planeta Tierra.', 'La Tierra', 'Marte', 'Venus', 'Júpiter');
+q('Cultura General', 2, '¿Cuántos lados tiene un hexágono?', 'El hexágono tiene seis lados.', '6', '5', '7', '8');
+q('Cultura General', 3, '¿En qué país están las pirámides de Giza?', 'Las pirámides de Giza están en Egipto.', 'Egipto', 'México', 'Perú', 'India');
+q('Cultura General', 3, '¿Cuál es el metal precioso cuyo símbolo es "Ag"?', 'Ag corresponde a la plata (del latín argentum).', 'La plata', 'El oro', 'El platino', 'El cobre');
+q('Cultura General', 4, '¿Cuántos colores tiene la bandera de Francia?', 'La bandera francesa es tricolor: azul, blanco y rojo.', '3', '2', '4', '5');
+q('Cultura General', 5, '¿En qué año llegó el ser humano a la Luna por primera vez?', 'En 1969, con la misión Apolo 11.', '1969', '1959', '1972', '1981');
+tf('Cultura General', 2, 'Un triángulo equilátero tiene sus tres lados iguales.', 'También tiene sus tres ángulos iguales, de 60°.', true);
+
 // ======================================================================
 
 async function main(): Promise<void> {

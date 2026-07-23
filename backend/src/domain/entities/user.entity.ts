@@ -168,6 +168,14 @@ export class User extends BaseEntity {
     this.touch();
   }
 
+  /** Gasta monedas (p. ej. al usar un comodín). Falla si el saldo no alcanza. */
+  spendCoins(amount: number): void {
+    if (amount < 0) throw new DomainException('El costo no puede ser negativo.');
+    if (this._coins < amount) throw new DomainException('No tenés monedas suficientes para este comodín.');
+    this._coins -= amount;
+    this.touch();
+  }
+
   /**
    * Actualiza la racha diaria: +1 si jugó ayer, se mantiene si ya jugó hoy,
    * se reinicia a 1 si hubo un salto. `playDate` en formato yyyy-mm-dd.
